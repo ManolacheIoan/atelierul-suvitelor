@@ -88,16 +88,16 @@ export default function ServicesPage() {
                           <span className="svc-desc">{s.description}</span>
                           <span className="svc-meta">
                             {formatDuration(s.durationMin)} ·{" "}
-                            <Link href={`/programare/?serviciu=${s.id}`} aria-label={`Programează: ${s.name}`}>
-                              Alege
+                            <Link href={`/programare/?serviciu=${s.id}`}>
+                              Alege<span className="visually-hidden"> {s.name}</span>
                             </Link>
                           </span>
                         </th>
                         <td className="num col-duration">{formatDuration(s.durationMin)}</td>
                         <td className="num price">{formatPrice(s)}</td>
                         <td className="num col-book">
-                          <Link className="link-arrow" href={`/programare/?serviciu=${s.id}`} aria-label={`Programează: ${s.name}`}>
-                            Alege
+                          <Link className="link-arrow" href={`/programare/?serviciu=${s.id}`}>
+                            Alege<span className="visually-hidden"> {s.name}</span>
                           </Link>
                         </td>
                       </tr>

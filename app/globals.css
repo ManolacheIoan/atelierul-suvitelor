@@ -1593,6 +1593,7 @@ body {
   height: 100%;
   margin: 0;
   cursor: pointer;
+  z-index: 1;
 }
 .swatch label {
   display: flex;
