@@ -1305,6 +1305,7 @@ body {
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.2rem;
+  scroll-margin-top: calc(var(--header-h) + 16px);
 }
 .price-section__head h2 {
   margin: 0;
@@ -1384,8 +1385,13 @@ body {
   text-transform: none;
 }
 @media (max-width: 34rem) {
-  .price-table .col-duration {
+  .price-table .col-duration,
+  .price-table .col-book {
     display: none;
+  }
+  .price-table th,
+  .price-table td {
+    padding-inline: 0.85rem;
   }
   .price-table .svc-meta {
     display: block;
