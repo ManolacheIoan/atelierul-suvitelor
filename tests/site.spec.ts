@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { BUSINESS_NAME } from "../config/site";
 import { checkService, fillContact, freezeClock, next, pages, pickFirstSlot } from "./helpers";
 
 test("nicio cerere externă: toate paginile și o programare completă", async ({ page, baseURL }) => {
@@ -34,7 +35,7 @@ test("toate paginile: titlu, un singur h1, noindex, fără erori în consolă", 
     const res = await page.goto(path);
     expect(res?.status(), path).toBe(200);
     await expect(page.locator("h1"), path).toHaveCount(1);
-    await expect(page).toHaveTitle(/Atelierul Șuvițelor/);
+    await expect(page).toHaveTitle(new RegExp(BUSINESS_NAME));
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
     await expect(page.locator("html")).toHaveAttribute("lang", "ro");
   }
