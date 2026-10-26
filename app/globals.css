@@ -31,6 +31,7 @@
   --shadow-lift: 0 2px 4px rgb(36 26 38 / 0.06), 0 22px 44px -18px rgb(59 31 63 / 0.38);
 
   --font-display: var(--font-display-latin), var(--font-display-ext), "Iowan Old Style", Georgia, serif;
+  --font-italic: var(--font-italic-latin), var(--font-italic-ext), var(--font-display-latin), Georgia, serif;
   --font-text: var(--font-text-latin), var(--font-text-ext), system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --radius: 18px;
@@ -120,7 +121,7 @@ h3 {
 
 em,
 .accent-italic {
-  font-family: var(--font-display);
+  font-family: var(--font-italic);
   font-style: italic;
   font-weight: 480;
   color: var(--accent-text);

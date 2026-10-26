@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { BookingApp } from "@/components/booking/BookingApp";
 import { PageHero } from "@/components/PageHero";
 
@@ -22,9 +21,7 @@ export default function BookingPage() {
         icon="dryer"
       />
       <section className="container section" style={{ paddingTop: 0 }} aria-label="Programare">
-        <Suspense fallback={<p className="muted">Se încarcă programarea…</p>}>
-          <BookingApp />
-        </Suspense>
+        <BookingApp />
       </section>
     </>
   );

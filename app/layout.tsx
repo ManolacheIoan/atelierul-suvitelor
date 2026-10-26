@@ -11,22 +11,37 @@ import "./globals.css";
 // Fonturi găzduite local: Fraunces (serif expresiv pentru titluri) și Manrope (text).
 // Fiecare are fișier „latin” + „latin-ext” (pentru ă, â, î, ș, ț).
 const display = localFont({
-  src: [
-    { path: "./fonts/fraunces-latin-wght-normal.woff2", style: "normal" },
-    { path: "./fonts/fraunces-latin-wght-italic.woff2", style: "italic" },
-  ],
+  src: "./fonts/fraunces-latin-wght-normal.woff2",
   weight: "300 800",
   variable: "--font-display-latin",
   display: "swap",
   adjustFontFallback: false,
 });
 const displayExt = localFont({
-  src: [
-    { path: "./fonts/fraunces-latin-ext-wght-normal.woff2", style: "normal" },
-    { path: "./fonts/fraunces-latin-ext-wght-italic.woff2", style: "italic" },
-  ],
+  src: "./fonts/fraunces-latin-ext-wght-normal.woff2",
   weight: "300 800",
   variable: "--font-display-ext",
+  display: "swap",
+  adjustFontFallback: false,
+  preload: false,
+});
+// Italicul (folosit doar pentru accente) nu se preîncarcă, ca primul ecran să apară mai repede.
+const italic = localFont({
+  src: [
+    { path: "./fonts/fraunces-latin-wght-italic.woff2", style: "italic" },
+  ],
+  weight: "300 800",
+  style: "italic",
+  variable: "--font-italic-latin",
+  display: "swap",
+  adjustFontFallback: false,
+  preload: false,
+});
+const italicExt = localFont({
+  src: "./fonts/fraunces-latin-ext-wght-italic.woff2",
+  weight: "300 800",
+  style: "italic",
+  variable: "--font-italic-ext",
   display: "swap",
   adjustFontFallback: false,
   preload: false,
@@ -58,7 +73,7 @@ export const viewport: Viewport = {
   themeColor: "#FBF7F2",
 };
 
-const fontVars = [display, displayExt, text, textExt].map((f) => f.variable).join(" ");
+const fontVars = [display, displayExt, italic, italicExt, text, textExt].map((f) => f.variable).join(" ");
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -63,7 +63,7 @@ export function LostStrandScene() {
       <g className="lost__scissors" transform="translate(210 24)">
         <SnipScissorsShape />
       </g>
-      <g className="lost__question" style={{ fill: "var(--copper-ink)", fontFamily: "var(--font-display)", fontSize: 34, fontStyle: "italic" }}>
+      <g className="lost__question" style={{ fill: "var(--copper-ink)", fontFamily: "var(--font-italic)", fontSize: 34, fontStyle: "italic" }}>
         <text x="40" y="70">?</text>
         <text x="270" y="110">?</text>
       </g>

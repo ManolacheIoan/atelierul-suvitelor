@@ -5,8 +5,7 @@
  * lib/availability.ts; salvarea trece prin adaptorul din lib/booking.
  */
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { Calendar } from "@/components/booking/Calendar";
 import { CheckIcon, PhoneIcon, ToolIcon, UsersIcon } from "@/components/icons";
 import { Portrait } from "@/components/illustrations/Portrait";
@@ -39,19 +38,23 @@ interface FormErrors {
   consent?: string;
 }
 
+const noSubscribe = () => () => {};
+
 export function BookingApp() {
-  const params = useSearchParams();
   const adapter = useMemo(() => getBookingAdapter(), []);
 
+  // Parametrii din adresă (?serviciu=…&specialist=…) se citesc doar în browser, ca pagina
+  // să rămână generată static (fără „salt” de layout la încărcare).
+  const search = useSyncExternalStore(noSubscribe, () => window.location.search, () => "");
+  const params = useMemo(() => new URLSearchParams(search), [search]);
+  const preService = params.get("serviciu");
+  const preStaff = params.get("specialist");
+
   const [step, setStep] = useState<Step>(1);
-  const [serviceIds, setServiceIds] = useState<string[]>(() => {
-    const id = params.get("serviciu");
-    return id && getService(id) ? [id] : [];
-  });
-  const [staffChoice, setStaffChoice] = useState<string>(() => {
-    const id = params.get("specialist");
-    return id && getStaff(id) ? id : ANY;
-  });
+  const [pickedServices, setServiceIds] = useState<string[] | null>(null);
+  const [pickedStaff, setStaffChoice] = useState<string | null>(null);
+  const serviceIds = pickedServices ?? (preService && getService(preService) ? [preService] : []);
+  const staffChoice = pickedStaff ?? (preStaff && getStaff(preStaff) ? preStaff : ANY);
   const [date, setDate] = useState<ISODate | null>(null);
   const [slot, setSlot] = useState<Slot | null>(null);
   const [name, setName] = useState("");
@@ -115,7 +118,8 @@ export function BookingApp() {
   }, [step, cancelled]);
 
   const sum = totals(serviceIds);
-  const capable = useMemo(() => staffForServices(serviceIds), [serviceIds]);
+  const serviceKey = serviceIds.join(",");
+  const capable = useMemo(() => staffForServices(serviceKey ? serviceKey.split(",") : []), [serviceKey]);
   const chosenStaff = useMemo(
     () => (staffChoice === ANY ? capable : capable.filter((m) => m.id === staffChoice)),
     [capable, staffChoice],
@@ -161,7 +165,7 @@ export function BookingApp() {
   const back = () => goTo((step - 1) as Step);
 
   const toggleService = (id: string) => {
-    setServiceIds((list) => (list.includes(id) ? list.filter((x) => x !== id) : [...list, id]));
+    setServiceIds(serviceIds.includes(id) ? serviceIds.filter((x) => x !== id) : [...serviceIds, id]);
     setDate(null);
     setSlot(null);
     setStepError(null);
