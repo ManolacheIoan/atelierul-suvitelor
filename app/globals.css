@@ -2050,7 +2050,7 @@ body {
   border-radius: 50%;
   background: var(--copper);
 }
-.day[aria-selected="true"] {
+.day[data-selected="true"] {
   background: var(--primary);
   color: var(--on-primary);
   border-color: transparent;
@@ -2562,4 +2562,8 @@ textarea.input {
 .matrix-wrap:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
+}
+.field label.checkbox {
+  display: flex;
+  font-weight: 400;
 }
