@@ -2555,3 +2555,11 @@ textarea.input {
     animation: none !important;
   }
 }
+
+.matrix .icon {
+  margin-inline: auto;
+}
+.matrix-wrap:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
