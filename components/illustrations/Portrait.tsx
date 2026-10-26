@@ -80,11 +80,14 @@ export function Portrait({
           </linearGradient>
         </defs>
       )}
-      <circle cx="100" cy="100" r="96" fill={backdrop} />
+      <circle cx="100" cy="100" r="96" style={{ fill: backdrop }} />
       <circle cx="100" cy="100" r="96" fill="none" stroke={COPPER} strokeOpacity=".35" strokeDasharray="2 6" />
 
       <g stroke={INK} strokeWidth="2.2" strokeLinejoin="round" strokeLinecap="round">
         {BACK[spec.hair] && <path className="portrait__hair" d={BACK[spec.hair]} fill={hairFill} />}
+        {(spec.hair === "lung" || spec.hair === "ondulat") && (
+          <path className="portrait__hair" d="M80 118h40v40H80Z" fill={hairFill} stroke="none" />
+        )}
         {spec.hair === "buclat" &&
           CURLS.map((c, i) => <circle key={`b${i}`} className="portrait__hair" cx={c.cx} cy={c.cy + 6} r={c.r} fill={hairFill} />)}
 
