@@ -250,8 +250,14 @@ export function servicesByCategory(category: ServiceCategory): Service[] {
 }
 
 /** Durata și prețul total pentru o selecție de servicii. */
-export function totals(ids: readonly string[]): { durationMin: number; priceLei: number; hasFromPrice: boolean } {
-  return ids.reduce(
+export interface Totals {
+  durationMin: number;
+  priceLei: number;
+  hasFromPrice: boolean;
+}
+
+export function totals(ids: readonly string[]): Totals {
+  return ids.reduce<Totals>(
     (acc, id) => {
       const s = getService(id);
       if (!s) return acc;
