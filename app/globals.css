@@ -1542,7 +1542,7 @@ body {
 .studio__handle::after {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 84%;
   left: -15px;
   width: 28px;
   height: 28px;
