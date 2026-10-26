@@ -18,6 +18,7 @@ const display = localFont({
   weight: "300 800",
   variable: "--font-display-latin",
   display: "swap",
+  adjustFontFallback: false,
 });
 const displayExt = localFont({
   src: [
@@ -27,6 +28,7 @@ const displayExt = localFont({
   weight: "300 800",
   variable: "--font-display-ext",
   display: "swap",
+  adjustFontFallback: false,
   preload: false,
 });
 const text = localFont({
@@ -34,12 +36,14 @@ const text = localFont({
   weight: "200 800",
   variable: "--font-text-latin",
   display: "swap",
+  adjustFontFallback: false,
 });
 const textExt = localFont({
   src: "./fonts/manrope-latin-ext-wght-normal.woff2",
   weight: "200 800",
   variable: "--font-text-ext",
   display: "swap",
+  adjustFontFallback: false,
   preload: false,
 });
 
