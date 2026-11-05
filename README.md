@@ -8,6 +8,10 @@
 
 ![Pagina principală Atelierul Șuvițelor](docs/screenshot.webp)
 
+## English summary
+
+Portfolio project: a static website for a fictional hair salon and barbershop. Online booking shows only each specialist's free time slots (bookings are kept in the visitor's browser), plus a gallery and a light and dark theme. Next.js static export with no backend and no external requests, tested with Vitest, Playwright and axe (accessibility). The site itself is in Romanian.
+
 Salon de coafură și barbershop din Galați, pentru femei, bărbați, adolescenți și copii.
 Site static (Next.js 16, export în `out/`), fără backend, fără scripturi sau fonturi externe
 și fără nicio cerere către alte servere în timpul rulării.
