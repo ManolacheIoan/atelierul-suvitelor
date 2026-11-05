@@ -6,6 +6,8 @@
 > Textul de confidențialitate este un model generic și trebuie verificat de un jurist
 > înainte de folosirea reală. Site-ul are `noindex`, ca să nu apară în motoarele de căutare.
 
+![Pagina principală Atelierul Șuvițelor](docs/screenshot.webp)
+
 Salon de coafură și barbershop din Galați, pentru femei, bărbați, adolescenți și copii.
 Site static (Next.js 16, export în `out/`), fără backend, fără scripturi sau fonturi externe
 și fără nicio cerere către alte servere în timpul rulării.
