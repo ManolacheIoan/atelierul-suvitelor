@@ -1,0 +1,39 @@
+# Runs on every push to main and on pull requests: lint, build, type check,
+# unit tests (Vitest) and end-to-end tests (Playwright, phone and desktop).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      # npm install instead of npm ci: npm ci rejects the lock file over optional WASM deps on Linux.
+      - run: npm install --no-audit --no-fund
+      - run: npm run lint
+      # The build comes before the type check (it generates next-env.d.ts)
+      # and before the end-to-end tests (they run against the static export in out/).
+      - run: npm run build
+      - run: npm run typecheck
+      - run: npx vitest run
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
