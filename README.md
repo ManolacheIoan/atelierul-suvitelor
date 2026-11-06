@@ -6,6 +6,8 @@
 > Textul de confidențialitate este un model generic și trebuie verificat de un jurist
 > înainte de folosirea reală. Site-ul are `noindex`, ca să nu apară în motoarele de căutare.
 
+**Live:** [manolacheioan.github.io/atelierul-suvitelor](https://manolacheioan.github.io/atelierul-suvitelor/)
+
 ![Pagina principală Atelierul Șuvițelor](docs/screenshot.webp)
 
 ## English summary
